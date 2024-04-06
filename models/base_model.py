@@ -5,6 +5,7 @@ class BaseModel
 from uuid import uuid4
 from datetime import datetime
 import models
+import copy
 
 class BaseModel:
     """
@@ -18,10 +19,11 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                if key in ["created_at", "updated_at"]:
-                    setattr(self, key, datetime.fromisoformat(value))
-                else:
-                    setattr(self, key, value)
+                if key != '__class__':
+                    if key in ["created_at", "updated_at"]:
+                        setattr(self, key, datetime.fromisoformat(value))
+                    else:
+                        setattr(self, key, value)
         else:
             models.storage.new(self)
 
@@ -36,7 +38,7 @@ class BaseModel:
         with the current datetime
         """
         self.updated_at = datetime.now()
-        models.Storage.save_to_file(self)
+        models.storage.save_to_file()
 
     def to_dict(self):
         """
