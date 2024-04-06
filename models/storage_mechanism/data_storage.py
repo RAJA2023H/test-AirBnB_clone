@@ -14,9 +14,9 @@ class Storage:
     __users = {}
     __json_file = 'file.json'
 
-    def base(self):
+    def entire_base(self):
         """
-        returns the dictinary a copy of __users dictionary
+        returns the dictinary of __users dictionary
         """
         return Storage.__users
 
@@ -24,9 +24,9 @@ class Storage:
         """
         sets in __instances the 'instance' with key '<instance classname>.id'
         """
-        user_classname = user.__class__.__name__
-        user_id = user.id
-        Storage.__users[f"{user_classname}.{user_id}"] = user
+        u_classname = user.__class__.__name__
+        u_id = user.id
+        Storage.__users[f"{u_classname}.{u_id}"] = user
 
 
     def save(self):
@@ -34,7 +34,7 @@ class Storage:
         Saves the instance to a JSON file.
         we pass the instance itself as an argument to the save method.
         """
-        data = Storage.__users
+        data = dict(Storage.__users)
         filepath = Storage.__json_file
         for key, value in data.items():
             data[key] = value.to_dict()
