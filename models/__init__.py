@@ -2,7 +2,7 @@
 
 """ Importing Modules """
 
-from models.storage_mechanism.data_storage import Storage
+from models.engine.file_storage import Storage
 
 storage = Storage()
-storage.load_from_file()
+storage.reload()

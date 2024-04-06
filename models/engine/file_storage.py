@@ -14,7 +14,7 @@ class Storage:
     __users = {}
     __json_file = 'file.json'
 
-    def entire_base(self):
+    def all(self):
         """
         returns the dictinary of __users dictionary
         """
@@ -41,7 +41,7 @@ class Storage:
         with open(filepath, 'w') as file:
             json.dump(data, file)
 
-    def load_from_file(self):
+    def reload(self):
         """
         Loads instances of the given class from a JSON file.
         """
