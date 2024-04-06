@@ -7,6 +7,7 @@ from datetime import datetime
 import models
 import copy
 
+
 class BaseModel:
     """
     Class BaseModel that defines all common
@@ -26,7 +27,6 @@ class BaseModel:
                         setattr(self, key, value)
         else:
             models.storage.new(self)
-
 
     def __str__(self):
         """ Returns a string representation of the object """
