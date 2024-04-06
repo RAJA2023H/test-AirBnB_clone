@@ -28,7 +28,6 @@ class FileStorage:
         u_id = user.id
         FileStorage.__users[f"{u_classname}.{u_id}"] = user
 
-
     def save(self):
         """
         Saves the instance to a JSON file.
@@ -49,7 +48,7 @@ class FileStorage:
         filepath = FileStorage.__json_file
         if os.path.exists(filepath):
             try:
-                with open(filepath, 'r') as file:
+                with open(filepath) as file:
                     content = json.load(file)
                     for key, value in content.items():
                         if "BaseModel" in key:
