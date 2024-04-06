@@ -7,7 +7,7 @@ import os
 from models.base_model import BaseModel
 
 
-class Storage:
+class FileStorage:
     """
     Encapsulates the logic for saving and loading instances to and from a JSON file.
     """
@@ -18,7 +18,7 @@ class Storage:
         """
         returns the dictinary of __users dictionary
         """
-        return Storage.__users
+        return FileStorage.__users
 
     def new(self,user):
         """
@@ -26,7 +26,7 @@ class Storage:
         """
         u_classname = user.__class__.__name__
         u_id = user.id
-        Storage.__users[f"{u_classname}.{u_id}"] = user
+        FileStorage.__users[f"{u_classname}.{u_id}"] = user
 
 
     def save(self):
@@ -34,8 +34,8 @@ class Storage:
         Saves the instance to a JSON file.
         we pass the instance itself as an argument to the save method.
         """
-        data = dict(Storage.__users)
-        filepath = Storage.__json_file
+        data = dict(FileStorage.__users)
+        filepath = FileStorage.__json_file
         for key, value in data.items():
             data[key] = value.to_dict()
         with open(filepath, 'w') as file:
@@ -45,8 +45,8 @@ class Storage:
         """
         Loads instances of the given class from a JSON file.
         """
-        data = Storage.__users
-        filepath = Storage.__json_file
+        data = FileStorage.__users
+        filepath = FileStorage.__json_file
         if os.path.exists(filepath):
             try:
                 with open(filepath, 'r') as file:
