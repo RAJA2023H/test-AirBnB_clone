@@ -54,5 +54,5 @@ class Storage:
                     for key, value in content.items():
                         if "BaseModel" in key:
                             data[key] = BaseModel(**value)
-            except FileNotFoundError:
+            except Exception:
                 pass  # File doesn't exist yet, return empty list
