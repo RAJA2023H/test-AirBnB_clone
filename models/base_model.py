@@ -4,7 +4,7 @@ class BaseModel
 """
 import uuid
 import datetime
-from models.storage_mechanism.storage import Storage 
+import models
 
 class BaseModel:
     """
@@ -27,7 +27,7 @@ class BaseModel:
         with the current datetime
         """
         self.updated_at = datetime.datetime.utcnow()
-        Storage.save_to_file(self)
+        models.Storage.save_to_file(self)
 
     def to_dict(self):
         """
