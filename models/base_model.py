@@ -2,8 +2,8 @@
 """
 class BaseModel
 """
-import uuid
-import datetime
+from uuid import uuid4
+from datetime import datetime
 import models
 
 class BaseModel:
@@ -11,11 +11,20 @@ class BaseModel:
     Class BaseModel that defines all common
     attributes/methods for other classes:
     """
-    def __init__(self, id: str = None, created_at=None, updated_at=None):
+    def __init__(self, *args, **kwargs) -> None:
         """ initializes the object's attributes when an object created """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.utcnow()
-        self.updated_at = self.created_at
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key in ["created_at", "updated_at"]:
+                    setattr(self, key, datetime.fromisoformat(value))
+                else:
+                    setattr(self, key, value)
+        else:
+            models.storage.new(self)
+
 
     def __str__(self):
         """ Returns a string representation of the object """
@@ -26,7 +35,7 @@ class BaseModel:
         updates the public instance attribute updated_at
         with the current datetime
         """
-        self.updated_at = datetime.datetime.utcnow()
+        self.updated_at = datetime.now()
         models.Storage.save_to_file(self)
 
     def to_dict(self):
