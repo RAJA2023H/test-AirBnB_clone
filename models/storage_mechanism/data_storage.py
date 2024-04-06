@@ -29,7 +29,7 @@ class Storage:
         Storage.__users[f"{user_classname}.{user_id}"] = user
 
 
-    def save_to_file(self):
+    def save(self):
         """
         Saves the instance to a JSON file.
         we pass the instance itself as an argument to the save method.

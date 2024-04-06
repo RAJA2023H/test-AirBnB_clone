@@ -32,21 +32,23 @@ class BaseModel:
         """ Returns a string representation of the object """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
-    def save(self):
+    def save(self) -> None:
         """
         updates the public instance attribute updated_at
         with the current datetime
         """
         self.updated_at = datetime.now()
-        models.storage.save_to_file()
+        models.storage.save()
 
     def to_dict(self):
         """
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        obj_dict = self.__dict__.copy()
-        obj_dict['__class__'] = self.__class__.__name__
-        obj_dict['created_at'] = self.created_at.isoformat()
-        obj_dict['updated_at'] = self.updated_at.isoformat()
+        obj_dict = dict(self.__dict__)
+        obj_dict["__class__"] = self.__class__.__name__
+        if not isinstance(obj_dict["created_at"], str):
+            obj_dict['created_at'] = obj_dict["created_at"].isoformat()
+        if not isinstance(obj_dict["updated_at"], str):
+            obj_dict['updated_at'] = self.updated_at.isoformat()
         return obj_dict  # dynamically generates the dictionary
