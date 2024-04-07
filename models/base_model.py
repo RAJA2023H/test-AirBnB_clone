@@ -24,7 +24,7 @@ class BaseModel:
                 elif key != '__class__':
                     self.__dict__[key] = value
         else:
-            models.FileStorage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """ Returns a string representation of the object """
