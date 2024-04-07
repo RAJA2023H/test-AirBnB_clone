@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Storage mechanism
+FileStorage
 """
 import json
 import os
@@ -22,7 +22,7 @@ class FileStorage:
 
     def new(self,user):
         """
-        sets in __instances the 'instance' with key '<instance classname>.id'
+        sets in __users the 'instance' with key '<user classname>.id'
         """
         u_classname = user.__class__.__name__
         u_id = user.id
@@ -30,8 +30,8 @@ class FileStorage:
 
     def save(self):
         """
-        Saves the instance to a JSON file.
-        we pass the instance itself as an argument to the save method.
+        Saves the user to a JSON file.
+        we pass the user itself as an argument to the save method.
         """
         data = dict(FileStorage.__users)
         filepath = FileStorage.__json_file
@@ -42,15 +42,15 @@ class FileStorage:
 
     def reload(self):
         """
-        Loads instances of the given class from a JSON file.
+        Loads user of the given class from a JSON file.
         """
         data = FileStorage.__users
         filepath = FileStorage.__json_file
         if os.path.exists(filepath):
             try:
                 with open(filepath) as file:
-                    content = json.load(file)
-                    for key, value in content.items():
+                    content = json.load(file).items()
+                    for key, value in content:
                         if "BaseModel" in key:
                             data[key] = BaseModel(**value)
             except Exception:
