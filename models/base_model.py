@@ -24,7 +24,7 @@ class BaseModel:
                 elif key != '__class__':
                     self.__dict__[key] = value
         else:
-            FileStorage.new(self)
+            models.FileStorage.new(self)
 
     def __str__(self):
         """ Returns a string representation of the object """
@@ -36,7 +36,7 @@ class BaseModel:
         with the current datetime
         """
         self.updated_at = datetime.now()
-        FileStorage.save()
+        models.FileStorage.save()
 
     def to_dict(self):
         """
