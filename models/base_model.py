@@ -4,7 +4,6 @@ class BaseModel
 """
 from uuid import uuid4
 from datetime import datetime
-import models
 
 
 class BaseModel:
@@ -24,6 +23,7 @@ class BaseModel:
                 elif key != '__class__':
                     self.__dict__[key] = value
         else:
+            from nodels import storage
             models.storage.new(self)
 
     def __str__(self):
@@ -35,15 +35,15 @@ class BaseModel:
         updates the public instance attribute updated_at
         with the current datetime
         """
+        from nodels import storage
         self.updated_at = datetime.now()
-        models.FileStorage.save()
+        storage.save()
 
     def to_dict(self):
         """
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        obj_dict = {}
         obj_dict = dict(self.__dict__)
         obj_dict["__class__"] = self.__class__.__name__
         if not isinstance(obj_dict["created_at"], str):
