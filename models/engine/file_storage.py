@@ -46,7 +46,7 @@ class FileStorage:
         """
         data = FileStorage.__users
         filepath = FileStorage.__json_file
-        if os.path.exists(filepath):
+        if path.exists(filepath):
             try:
                 with open(filepath) as file:
                     content = json.load(file).items()
