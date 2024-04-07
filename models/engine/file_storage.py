@@ -39,7 +39,7 @@ class FileStorage:
             temp = temp.update(FileStorage.__users)
             for key, value in temp.items():
                 temp[key] = value.to_dict()
-                json.dump(temp, file)
+            json.dump(temp, file)
 
     def reload(self):
         """
