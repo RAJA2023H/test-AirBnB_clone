@@ -35,7 +35,7 @@ class BaseModel:
         updates the public instance attribute updated_at
         with the current datetime
         """
-        from nodels import storage
+        from models import storage
         self.updated_at = datetime.now()
         storage.save()
 
