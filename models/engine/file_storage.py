@@ -36,7 +36,7 @@ class FileStorage:
         filepath = FileStorage.__json_file
         with open(filepath, 'w') as file:
             temp = {}
-            temp = temp.update(FileStorage.__users)
+            temp.update(FileStorage.__users)
             for key, value in temp.items():
                 temp[key] = value.to_dict()
             json.dump(temp, file)
