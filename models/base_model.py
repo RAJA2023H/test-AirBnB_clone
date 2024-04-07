@@ -43,6 +43,7 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
+        obj_dict = {}
         obj_dict = dict(self.__dict__)
         obj_dict["__class__"] = self.__class__.__name__
         if not isinstance(obj_dict["created_at"], str):
