@@ -33,10 +33,10 @@ class FileStorage:
         Saves the user to a JSON file.
         we pass the user itself as an argument to the save method.
         """
+        filepath = FileStorage.__json_file
         with open(filepath, 'w') as file:
             temp = {}
             temp = temp.update(FileStorage.__users)
-            filepath = FileStorage.__json_file
             for key, value in temp.items()i:
                 temp[key] = value.to_dict()
                 json.dump(temp, file)
