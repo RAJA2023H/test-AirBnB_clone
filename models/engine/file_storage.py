@@ -3,7 +3,7 @@
 FileStorage
 """
 import json
-import os import path
+import os
 from models.base_model import BaseModel
 
 
@@ -46,7 +46,7 @@ class FileStorage:
         """
         data = FileStorage.__users
         filepath = FileStorage.__json_file
-        if path.exists(filepath):
+        if os.path.exists(filepath):
             try:
                 with open(filepath) as file:
                     content = json.load(file).items()
