@@ -28,8 +28,8 @@ class BaseModel:
 
     def __str__(self) -> str:
         """ Returns a string representation of the object """
-        
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self) -> None:
         """
@@ -44,10 +44,10 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        obj_dict = {}
-        obj_dict.update(self.__dict__)
-        obj_dict.update({'__class__':
-                          (str(type(self)).split('.')[-1]).split('\'')[0]})
-        obj_dict['created_at'] = self.created_at.isoformat()
-        obj_dict['updated_at'] = self.updated_at.isoformat()
-        return obj_dict
+        dictionary = dict(self.__dict__)
+        dictionary["__class__"] = self.__class__.__name__
+        if not isinstance(dictionary["created_at"], str):
+            dictionary["created_at"] = dictionary["created_at"].isoformat()
+        if not isinstance(dictionary["updated_at"], str):
+            dictionary["updated_at"] = dictionary["updated_at"].isoformat()
+        return dictionary
