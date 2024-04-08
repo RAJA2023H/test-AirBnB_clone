@@ -35,12 +35,11 @@ class FileStorage:
         we pass the user itself as an argument to the save method.
         """
         filepath = FileStorage.__json_file
-        with open(filepath, 'w') as file:
-            temp = {}
-            temp.update(FileStorage.__users)
-            for key, value in temp.items():
-                temp[key] = value.to_dict()
-            json.dump(temp, file)
+        data = dict(FileStorage.__users)
+        for key, value in data.items():
+            data[key] = value.to_dict()
+        with open(filepath, 'w') as f:
+            json.dump(data, f)
 
     def reload(self):
         """
