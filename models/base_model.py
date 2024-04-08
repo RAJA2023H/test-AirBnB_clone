@@ -26,12 +26,12 @@ class BaseModel:
             from models import storage
             storage.new(self)
 
-    def __str__(self) -> str:
+    def __str__(self):
         """ Returns a string representation of the object """
         
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
-    def save(self) -> None:
+    def save(self):
         """
         updates the public instance attribute updated_at
         with the current datetime
