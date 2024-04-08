@@ -4,6 +4,7 @@ class BaseModel
 """
 from uuid import uuid4
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -22,8 +23,10 @@ class BaseModel:
                     self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 elif key != '__class__':
                     self.__dict__[key] = value
+        else:
+            models.storage.new(self)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ Returns a string representation of the object """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
@@ -33,6 +36,7 @@ class BaseModel:
         with the current datetime
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
