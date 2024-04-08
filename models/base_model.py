@@ -22,9 +22,6 @@ class BaseModel:
                     self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 elif key != '__class__':
                     self.__dict__[key] = value
-        else:
-            from models import storage
-            storage.new(self)
 
     def __str__(self):
         """ Returns a string representation of the object """
@@ -35,9 +32,7 @@ class BaseModel:
         updates the public instance attribute updated_at
         with the current datetime
         """
-        from models import storage
         self.updated_at = datetime.now()
-        storage.save()
 
     def to_dict(self):
         """
