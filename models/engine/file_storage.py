@@ -24,9 +24,10 @@ class FileStorage:
         """
         sets in __users the 'instance' with key '<user classname>.id'
         """
-        u_classname = user.__class__.__name__
-        u_id = user.id
-        FileStorage.__users[f"{u_classname}.{u_id}"] = user
+        classname = user.to_dict()["__class__"]
+        id = user.to_dict()["id"]
+        keyname = classname+"."+id
+        FileStorage.__users[keyname] = user
 
     def save(self):
         """
