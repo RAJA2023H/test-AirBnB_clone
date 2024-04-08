@@ -50,8 +50,7 @@ class FileStorage:
         if os.path.exists(filepath):
             try:
                 with open(filepath) as file:
-                    content = json.load(file).items()
-                    for key, value in content:
+                    for key, value in json.load(file).items():
                         if "BaseModel" in key:
                             data[key] = BaseModel(**value)
             except Exception:

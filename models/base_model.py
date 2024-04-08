@@ -28,6 +28,7 @@ class BaseModel:
 
     def __str__(self) -> str:
         """ Returns a string representation of the object """
+        
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self) -> None:
@@ -43,7 +44,7 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        obj_dict= dict(self.__dict__)
+        obj_dict = dict(self.__dict__)
         obj_dict["__class__"] = self.__class__.__name__
         if not isinstance(obj_dict["created_at"], str):
             obj_dict['created_at'] = obj_dict["created_at"].isoformat()
