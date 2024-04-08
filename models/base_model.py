@@ -46,9 +46,8 @@ class BaseModel:
         """
         obj_dict = {}
         obj_dict.update(self.__dict__)
-        obj_dict["__class__"] = self.__class__.__name__
-        if not isinstance(obj_dict["created_at"], str):
-            obj_dict['created_at'] = obj_dict["created_at"].isoformat()
-        if not isinstance(obj_dict["updated_at"], str):
-            obj_dict['updated_at'] = self.updated_at.isoformat()
-        return obj_dict  # dynamically generates the dictionary
+        obj_dict.update({'__class__':
+                          (str(type(self)).split('.')[-1]).split('\'')[0]})
+        obj_dict['created_at'] = self.created_at.isoformat()
+        obj_dict['updated_at'] = self.updated_at.isoformat()
+        return obj_dict
