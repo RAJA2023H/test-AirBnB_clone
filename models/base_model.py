@@ -28,10 +28,12 @@ class BaseModel:
         else:
             models.storage.new(self)
 
+
     def __str__(self) -> str:
         """ Returns a string representation of the object """
         return "[{}] ({}) {}".format(
             self.__class__.__name__, self.id, self.__dict__)
+
 
     def save(self) -> None:
         """
@@ -40,6 +42,7 @@ class BaseModel:
         """
         self.updated_at = datetime.now()
         models.storage.save()
+
 
     def to_dict(self):
         """
