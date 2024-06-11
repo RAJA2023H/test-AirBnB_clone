@@ -12,6 +12,8 @@ class BaseModel:
     Class BaseModel that defines all common
     attributes/methods for other classes:
     """
+
+
     def __init__(self, *args, **kwargs) -> None:
         """ initializes the object's attributes when an object created """
         self.id = str(uuid4())
