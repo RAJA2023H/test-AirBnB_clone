@@ -13,20 +13,20 @@ class BaseModel:
     """
 
 
-    def __init__(self) -> None:
+    def __init__(self):
         """ initializes the object's attributes when an object created """
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
 
-    def __str__(self) -> str:
+    def __str__(self):
         """ Returns a string representation of the object """
-        return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__)
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
 
-    def save(self) -> None:
+    def save(self):
         """
         updates the public instance attribute updated_at
         with the current datetime
@@ -39,10 +39,8 @@ class BaseModel:
         returns a dictionary containing all keys/values
         of __dict__ of the instance
         """
-        dictionary = dict(self.__dict__)
+        dictionary = self.__dict__.copy()
         dictionary["__class__"] = self.__class__.__name__
-        if not isinstance(dictionary["created_at"], str):
-            dictionary["created_at"] = dictionary["created_at"].isoformat()
-        if not isinstance(dictionary["updated_at"], str):
-            dictionary["updated_at"] = dictionary["updated_at"].isoformat()
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
         return dictionary
