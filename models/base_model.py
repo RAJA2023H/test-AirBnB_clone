@@ -16,8 +16,8 @@ class BaseModel:
     def __init__(self):
         """ initializes the object's attributes when an object created """
         self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.created_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
 
 
     def __str__(self):
