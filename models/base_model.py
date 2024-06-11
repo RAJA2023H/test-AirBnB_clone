@@ -14,7 +14,7 @@ class BaseModel:
     """
 
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self) -> None:
         """ initializes the object's attributes when an object created """
         self.id = str(uuid4())
         self.created_at = datetime.now()
@@ -33,7 +33,6 @@ class BaseModel:
         with the current datetime
         """
         self.updated_at = datetime.now()
-        models.storage.save()
 
 
     def to_dict(self):
