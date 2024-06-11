@@ -19,14 +19,6 @@ class BaseModel:
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        if kwargs:
-            for key,value in kwargs.items():
-                if key in ["created_at", "updated_at"]:
-                    self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                elif key != '__class__':
-                    self.__dict__[key] = value
-        else:
-            models.storage.new(self)
 
 
     def __str__(self) -> str:
